@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.FabricaDeMates" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#050a1c</item>
+        <item name="android:navigationBarColor">#050a1c</item>
+    </style>
+</resources>

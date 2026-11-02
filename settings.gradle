@@ -1,0 +1,2 @@
+rootProject.name = 'fabrica-de-mates'
+include ':app'
