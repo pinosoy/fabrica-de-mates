@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8">
+<html lang="es">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -8,143 +10,1205 @@
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--acc:#19a7ff;--yl:#ffd23f;--gr:#2dff7a;--pk:#ff3fa4;--tx:#eaf6ff;color-scheme:dark;box-sizing:border-box;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px)}
+:root{
+  --acc:#19a7ff;--yl:#ffd23f;--gr:#2dff7a;--pk:#ff3fa4;--pu:#b34bff;--tx:#eaf6ff;
+  color-scheme:dark;box-sizing:border-box;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px)
+}
 html{scroll-padding-top:var(--safe-top);height:100%}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
-body{margin:0;min-height:100%;font-family:'Baloo 2','Trebuchet MS',system-ui,sans-serif;color:var(--tx);background:linear-gradient(#050a1cd0,#050a1cf2),var(--fact) center/cover fixed #050a1c;overflow-x:hidden;touch-action:manipulation}
-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(8px + var(--safe-top)) calc(12px + var(--safe-right)) 8px calc(12px + var(--safe-left));background:#050a1cdd;border-bottom:2px solid #16306b}
-#bk{width:42px;height:42px;border-radius:50%;border:3px solid #19a7ff;background:#0a1a44;color:#fff;font-size:1.4rem;box-shadow:0 0 12px #19a7ff;display:grid;place-items:center;padding:0;cursor:pointer}
+body{
+  margin:0;min-height:100%;font-family:'Baloo 2','Trebuchet MS',system-ui,sans-serif;
+  color:var(--tx);background:linear-gradient(#050a1cd0,#050a1cf2),center/cover fixed #050a1c;
+  overflow-x:hidden;touch-action:manipulation
+}
+header{
+  position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;
+  padding:calc(6px + var(--safe-top)) calc(10px + var(--safe-right)) 6px calc(10px + var(--safe-left));
+  background:#050a1cee;backdrop-filter:blur(8px);border-bottom:2px solid #16306b
+}
+#bk{
+  width:40px;height:40px;border-radius:50%;border:3px solid var(--acc);background:#0a1a44;
+  color:#fff;font-size:1.3rem;box-shadow:0 0 10px var(--acc);display:grid;place-items:center;
+  padding:0;cursor:pointer;flex-shrink:0
+}
 #bk[hidden]{display:none}
-.pill{display:flex;align-items:center;gap:8px;background:#071030;border:3px solid #2a6cff;border-radius:30px;padding:2px 14px 2px 4px;font-weight:800;font-size:1.3rem;box-shadow:0 0 12px #2a6cff77;min-height:42px}
-.hrt{padding-left:14px;border-color:#ff3b5c;box-shadow:0 0 12px #ff3b5c88}
-.cn{width:30px;height:30px;border-radius:50%;background:radial-gradient(#ffe27a,#e0a300);border:2px solid #b87b00;display:inline-grid;place-items:center;font-size:.95rem;color:#8a5a00;font-style:normal}
+.pill{
+  display:flex;align-items:center;gap:6px;background:#071030;border:2.5px solid #2a6cff;
+  border-radius:30px;padding:2px 12px 2px 4px;font-weight:800;font-size:1.15rem;
+  box-shadow:0 0 10px #2a6cff77;min-height:38px
+}
+.cn{
+  width:28px;height:28px;border-radius:50%;background:radial-gradient(#ffe27a,#e0a300);
+  border:2px solid #b87b00;display:inline-grid;place-items:center;font-size:.9rem;color:#8a5a00;
+  font-style:normal
+}
 #coins.bump{animation:bp .5s}@keyframes bp{50%{transform:scale(1.25)}}
-#hud{margin-left:auto;display:flex;gap:8px}
-.user-pill{background:#0a1a44;border:2px solid var(--acc);padding:2px 8px;border-radius:20px;display:flex;align-items:center;gap:6px;font-size:0.9rem;font-weight:700}
-.user-pill img{width:20px;height:20px;border-radius:50%;background:#000}
-main{max-width:880px;margin:0 auto;padding:12px;padding-bottom:calc(20px + var(--safe-bottom))}
+#hud{margin-left:auto;display:flex;align-items:center;gap:8px}
+.user-pill{
+  background:#0a1a44;border:2px solid var(--acc);padding:2px 10px 2px 4px;border-radius:24px;
+  display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:800;cursor:pointer
+}
+.user-pill .av-mini{width:26px;height:26px;border-radius:50%;overflow:hidden;flex-shrink:0;display:grid;place-items:center}
+.user-pill .av-mini svg{width:100%;height:100%}
+
+main{max-width:860px;margin:0 auto;padding:12px;padding-bottom:calc(24px + var(--safe-bottom))}
 button{font:inherit;cursor:pointer;color:var(--tx)}
 :focus-visible{outline:4px solid var(--yl);outline-offset:2px}
-.tt{text-align:center;font-size:clamp(1.5rem,6vw,2.2rem);margin:8px 0;text-shadow:0 0 14px #19a7ff}
-.btn{background:linear-gradient(#2d9bff,#1262c9);border:0;border-bottom:5px solid #0a3a82;border-radius:30px;padding:8px 24px;font-weight:800;font-size:1.15rem;color:#fff;margin:4px;display:inline-block;text-decoration:none}
-.btn:active{transform:translateY(3px)}.btn.pk{background:linear-gradient(#ff6fbd,#c71f7e);border-bottom-color:#7d1a4f}.btn.gr{background:linear-gradient(#35e07a,#13a34f);border-bottom-color:#0b5a2f}
-.btn:disabled{opacity:0.5;filter:grayscale(1);cursor:not-allowed}
-.stage{position:relative;min-height:clamp(430px,72vh,580px);overflow:hidden;border-radius:20px;border:2px solid #1c3b7a;background:#070c1f;box-shadow:0 0 30px #19a7ff44}
-.stage .hero{position:absolute;right:0;bottom:0;height:86%;max-width:100%;-webkit-mask-image:linear-gradient(to left,#000 60%,transparent);mask-image:linear-gradient(to left,#000 60%,transparent)}
-.ld .hero{left:0;right:auto;height:100%;-webkit-mask-image:linear-gradient(to right,#000 55%,transparent);mask-image:linear-gradient(to right,#000 55%,transparent)}
-.lgw{position:absolute;left:18px;top:26px;z-index:2}
-.lg1{position:relative;display:inline-block;background:#ffd23f;color:#17203a;font-weight:800;font-size:clamp(2rem,9vw,3.4rem);line-height:1.1;padding:0 16px;border-radius:6px;box-shadow:0 5px 0 #b8860b,0 0 24px #000a;transform:rotate(-3deg)}
-.lg1 b{color:#e0245e;font-size:1.2em}.lg1 span{position:absolute;right:-16px;top:-14px;background:#19a7ff;color:#ffd23f;font-size:.36em;padding:0 8px;border-radius:6px;transform:rotate(8deg)}
-.lg2{font-weight:800;font-style:italic;font-size:clamp(1.05rem,5vw,1.7rem);color:#d8eeff;text-shadow:0 3px 0 #0b2a66,0 0 14px #19a7ff;transform:rotate(-3deg);margin:6px 0 0 6px}
-.mbs{position:absolute;left:16px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:2}
-.mb{display:flex;align-items:center;gap:10px;border:0;border-radius:30px;padding:7px 22px 7px 7px;font-weight:800;font-size:1.25rem;color:#fff;width:200px;text-align:left;box-shadow:0 4px 0 #0008}
-.mb i{width:36px;height:36px;border-radius:50%;background:#0b1530;display:grid;place-items:center;font-style:normal}
-.mb.g{background:linear-gradient(#35e07a,#13a34f)}.mb.b{background:linear-gradient(#2d9bff,#1262c9)}.mb.o{background:linear-gradient(#ffc43a,#f08a10);color:#4a2500}
-.lbar{position:absolute;right:5%;bottom:14%;width:min(46%,320px);text-align:center;font-weight:800;font-size:1.3rem}
-.lbar div{height:16px;border-radius:10px;background:#0a1a44;border:2px solid #2a6cff;overflow:hidden;margin-top:6px}.lbar i{display:block;height:100%;width:0;background:linear-gradient(#35c0ff,#1262c9);transition:width 1.5s linear}
-.lvs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-.lvc{position:relative;padding:0;border-radius:16px;overflow:hidden;border:3px solid var(--c);background:#0a1330;box-shadow:0 0 16px var(--c);text-align:center}
-.k0{--c:#2a82ff;--d:#1448b8}.k1{--c:#ff3fa4;--d:#b01270}.k2{--c:#ffb020;--d:#c26b00}
-.lvc .pt{aspect-ratio:1;overflow:hidden}.lvc img{width:100%;height:100%;object-fit:cover;display:block}
-.lvc .lb{background:linear-gradient(var(--c),var(--d));padding:6px 4px 10px}
-.lvc b{display:block;font-size:clamp(.95rem,3.8vw,1.25rem);line-height:1.1}.lvc span{font-size:clamp(.7rem,3vw,1rem);font-weight:800}
-.lvc u{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fffe;color:var(--d);text-decoration:none;font-size:1.3rem;margin:4px auto 0;line-height:1;font-weight:800}
-.lvc:disabled{filter:grayscale(.8) brightness(.55);cursor:not-allowed}
-.lk{position:absolute;inset:0 0 40% 0;display:grid;place-items:center;font-size:2.4rem}
-.okb{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;background:var(--gr);color:#052;display:grid;place-items:center;font-weight:800}
-.path{display:flex;align-items:center;justify-content:center;margin:16px 0}
-.path i{width:40px;height:40px;border-radius:50%;border:3px solid #2a6cff;background:#0a1a44;display:grid;place-items:center;font-style:normal}
-.path i.d{border-color:var(--gr);background:#073a22}.path u{width:clamp(18px,8vw,60px);border-top:3px dashed #2a6cff}
-.gm{display:grid;grid-template-columns:clamp(105px,30%,260px) 1fr;grid-template-areas:"ch hn" "ch eq" "bt bt";gap:8px 10px;margin-top:6px}
-.th0{--acc:#19a7ff}.th1{--acc:#ff3fa4}.th2{--acc:#ffb020}
-.chimg{grid-area:ch;position:relative;min-height:190px}
-.chimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;-webkit-mask-image:radial-gradient(ellipse at 50% 42%,#000 48%,transparent 76%);mask-image:radial-gradient(ellipse at 50% 42%,#000 48%,transparent 76%)}
-.hn{grid-area:hn;text-align:center;font-size:.95rem;color:#c8dcf0;background:#050c26aa;border-radius:12px;padding:6px 10px;align-self:start}.hn small{color:#ffd23f}
-.op{grid-area:eq;align-self:start;justify-self:center;display:grid;grid-template-columns:repeat(4,1.2em);justify-content:center;align-items:center;font-size:clamp(2rem,8.5vw,3.8rem);font-weight:800;line-height:1.15;background:#050c26ee;border:3px solid var(--acc);box-shadow:0 0 18px var(--acc),inset 0 0 18px #0008;border-radius:16px;padding:8px 14px}
-.op i{font-style:normal;text-align:center}
-.cy{font-size:.4em;width:1.6em;height:1.6em;border:3px dashed var(--pk);border-radius:50%;background:none;color:var(--pk);justify-self:center;padding:0;font-weight:800}
-.ln{grid-column:1/-1;height:6px;background:var(--acc);border-radius:3px;box-shadow:0 0 10px var(--acc);margin:2px 0}
-.sg{color:var(--pk)}.q{grid-column:span 3;color:var(--yl);animation:pl 1.2s infinite}@keyframes pl{50%{opacity:.4}}
-.opts{grid-area:bt;display:flex;gap:10px;justify-content:center}
-.ch{flex:1;max-width:220px;font-size:clamp(1.6rem,7vw,2.6rem);font-weight:800;padding:6px;border-radius:14px;background:#050c26ee;border:3px solid var(--acc);box-shadow:0 0 14px var(--acc);color:#fff}
-.ch.right{background:#0b7a3a;border-color:var(--gr);box-shadow:0 0 18px var(--gr)}.ch.wrong,.bx.wrong{filter:grayscale(1) brightness(.5)}.ch:disabled{opacity:.45}
-.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.belt{grid-area:bt;position:relative;aspect-ratio:4.2/1;overflow:hidden;border-radius:12px;border-top:8px solid #c1272d;border-bottom:8px solid #1c4fd0;background:repeating-linear-gradient(90deg,#2a3150 0 18px,#1d2340 18px 36px)}
-.bx{position:absolute;top:10%;width:26%;aspect-ratio:1.33;background:var(--box) center/100% 100% no-repeat;border:0;padding:0;filter:drop-shadow(0 4px 4px #000a)}
-.bx b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#050c26ee;border:2px solid var(--acc);border-radius:10px;padding:0 10px;font-size:clamp(1.1rem,5vw,2rem);color:#fff}
-.bx.right{outline:4px solid var(--gr)}
-#hand{position:fixed;left:0;top:0;width:48px;height:48px;transition:transform .4s;z-index:4;pointer-events:none;transform:translate(8px,calc(100vh - 64px));filter:drop-shadow(0 0 6px #19a7ff)}
-.ic{width:48px;height:48px}
-.win{display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center;gap:6px;margin-top:10px;text-align:center}
-.win img{width:100%;border-radius:16px;-webkit-mask-image:radial-gradient(ellipse,#000 52%,transparent 78%);mask-image:radial-gradient(ellipse,#000 52%,transparent 78%)}
-.vt{font-size:clamp(1.8rem,7vw,3.2rem);margin:0;color:var(--yl);-webkit-text-stroke:2px #0b2a66;paint-order:stroke fill;text-shadow:0 4px 0 #0b2a66,0 0 22px #19a7ff;line-height:1.05}
-.mg{background:#050c26ee;border:3px solid #2a6cff;border-radius:18px;padding:10px;margin-top:10px;box-shadow:0 0 16px #2a6cff77}
-.tro{font-size:4rem;animation:pl 1.5s infinite}
-.shg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:10px 0}
-.sc{background:#0a1330;border:3px solid #2a6cff;border-radius:16px;padding:6px;text-align:center;box-shadow:0 0 12px #2a6cff66}
-.sc img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}.sc b{display:block}
-.pr{display:inline-flex;align-items:center;gap:6px;margin-top:4px;background:linear-gradient(#35e07a,#13a34f);border-radius:20px;padding:2px 14px 2px 4px;font-weight:800;color:#04301a}.pr.ow{background:#2a6cff;color:#fff;padding:2px 14px}
-.card{background:#0c1634;border:2px solid #2b3a6b;border-radius:16px;padding:10px;margin:8px 0;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.it{margin:0}.it.on{border-color:var(--gr);box-shadow:0 0 12px var(--gr)}
-.pack{display:flex;justify-content:center;align-items:center;gap:12px;margin:8px}
-.hd{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#0b1530;border:3px solid #fff8}.hd .ic{width:40px;height:40px}
-.bp{background:#0008;border:2px dashed var(--pk);border-radius:14px;padding:8px 14px;font-size:1.6rem;min-width:90px}
-.big{font-size:2rem;font-weight:800}
-#msg{position:fixed;top:calc(64px + var(--safe-top));left:50%;transform:translate(-50%,-20px);opacity:0;transition:.3s;background:#000d;border:2px solid var(--gr);padding:6px 18px;border-radius:30px;z-index:9;font-weight:800;pointer-events:none;text-align:center;max-width:94vw}
+
+.tt{text-align:center;font-size:clamp(1.4rem,5.5vw,2.1rem);margin:8px 0;text-shadow:0 0 14px var(--acc)}
+.stt{text-align:center;font-size:1rem;color:#9ec7f0;margin:-4px 0 12px 0}
+.btn{
+  background:linear-gradient(#2d9bff,#1262c9);border:0;border-bottom:5px solid #0a3a82;
+  border-radius:30px;padding:10px 22px;font-weight:800;font-size:1.15rem;color:#fff;
+  margin:4px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;transition:transform .1s
+}
+.btn:active{transform:translateY(3px)}
+.btn.pk{background:linear-gradient(#ff6fbd,#c71f7e);border-bottom-color:#7d1a4f}
+.btn.gr{background:linear-gradient(#35e07a,#13a34f);border-bottom-color:#0b5a2f}
+.btn.pu{background:linear-gradient(#be5aff,#7a1bbd);border-bottom-color:#480f73}
+.btn.yl{background:linear-gradient(#ffd23f,#e5a600);border-bottom-color:#996f00;color:#2c1b00}
+.btn:disabled{opacity:0.45;filter:grayscale(1);cursor:not-allowed}
+
+.stage{
+  position:relative;min-height:clamp(440px,70vh,580px);overflow:hidden;border-radius:24px;
+  border:2.5px solid #1c3b7a;background:radial-gradient(ellipse at 50% 20%,#0e2154 0%,#060d26 80%);
+  box-shadow:0 0 30px #19a7ff33;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center
+}
+.lg{text-align:center;margin-bottom:16px}
+.lg1{
+  position:relative;display:inline-block;background:#ffd23f;color:#17203a;font-weight:800;
+  font-size:clamp(1.8rem,7.5vw,3rem);line-height:1.1;padding:2px 18px;border-radius:8px;
+  box-shadow:0 5px 0 #b8860b,0 0 20px #000a;transform:rotate(-2deg)
+}
+.lg1 b{color:#e0245e;font-size:1.15em}
+.lg1 span{
+  position:absolute;right:-14px;top:-12px;background:#19a7ff;color:#ffd23f;font-size:.38em;
+  padding:1px 6px;border-radius:6px;transform:rotate(8deg)
+}
+.lg2{
+  font-weight:800;font-style:italic;font-size:clamp(1rem,4.5vw,1.5rem);color:#d8eeff;
+  text-shadow:0 2px 0 #0b2a66,0 0 14px #19a7ff;transform:rotate(-2deg);margin-top:6px
+}
+
+.mbs{display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;z-index:2}
+.mb{
+  display:flex;align-items:center;gap:12px;border:0;border-radius:30px;padding:10px 20px;
+  font-weight:800;font-size:1.2rem;color:#fff;text-align:left;box-shadow:0 4px 0 #0008;
+  transition:transform .1s
+}
+.mb:active{transform:translateY(3px)}
+.mb i{width:36px;height:36px;border-radius:50%;background:#0b1530;display:grid;place-items:center;font-style:normal;flex-shrink:0}
+.mb.g{background:linear-gradient(#35e07a,#13a34f);border-bottom:4px solid #094a24}
+.mb.b{background:linear-gradient(#2d9bff,#1262c9);border-bottom:4px solid #083770}
+.mb.o{background:linear-gradient(#ffaa2a,#e06b00);border-bottom:4px solid #783900}
+.mb.p{background:linear-gradient(#c25fff,#8417c9);border-bottom:4px solid #4a0d70}
+
+/* Selector de Edades */
+.age-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.age-btn{
+  background:#09153a;border:2.5px solid #2b4582;border-radius:20px;padding:8px 14px;
+  font-weight:800;font-size:0.95rem;color:#cfe5ff;display:flex;align-items:center;gap:6px;
+  transition:all .15s
+}
+.age-btn.on{
+  background:linear-gradient(#19a7ff,#0e5db8);border-color:#ffd23f;color:#fff;
+  box-shadow:0 0 16px #19a7ff88;transform:scale(1.04)
+}
+.age-badge{
+  display:inline-block;background:var(--yl);color:#1c1100;font-size:0.85rem;font-weight:800;
+  padding:2px 10px;border-radius:12px;margin-bottom:6px
+}
+
+/* Tablero de Juego */
+.game-container{
+  background:#070f2b;border:3px solid #1a3c7c;border-radius:24px;padding:14px;
+  box-shadow:0 0 24px #19a7ff22;margin-top:6px
+}
+.op-board{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#050c26ee;border:3px solid var(--acc);border-radius:20px;
+  padding:14px 20px;box-shadow:0 0 20px var(--acc),inset 0 0 20px #0009;
+  min-height:180px;position:relative
+}
+.carries-row{display:flex;gap:12px;justify-content:flex-end;width:100%;max-width:280px;padding-right:8px;margin-bottom:4px}
+.cy{
+  width:34px;height:34px;border:2.5px dashed var(--pk);border-radius:50%;background:#140824;
+  color:var(--pk);display:grid;place-items:center;font-weight:800;font-size:1.1rem;cursor:pointer;
+  transition:all .15s
+}
+.cy.on{background:var(--pk);color:#fff;border-style:solid;box-shadow:0 0 12px var(--pk)}
+
+.vertical-calc{
+  display:grid;grid-template-columns:auto repeat(3,44px);gap:4px;font-size:2.6rem;font-weight:800;
+  align-items:center;justify-items:center;line-height:1.1
+}
+.calc-sign{color:var(--pk);font-size:2.8rem;grid-column:1}
+.col-h{font-size:0.75rem;font-weight:800;color:#6b8bbb;text-align:center;line-height:1}
+.calc-line{grid-column:1/-1;height:5px;background:var(--acc);border-radius:3px;box-shadow:0 0 10px var(--acc);width:100%;margin:4px 0}
+
+/* Casillas de Dígitos */
+.slots-row{
+  display:flex;gap:8px;justify-content:center;align-items:center;margin-top:4px
+}
+.digit-slot{
+  width:46px;height:54px;border-radius:12px;background:#091845;border:3px solid #365da8;
+  display:grid;place-items:center;font-size:2.2rem;font-weight:800;color:#fff;
+  cursor:pointer;transition:all .15s;position:relative
+}
+.digit-slot.active-slot{
+  border-color:var(--yl);box-shadow:0 0 16px var(--yl);background:#12296e;
+  animation:slot-pulse 1s infinite alternate
+}
+@keyframes slot-pulse{0%{box-shadow:0 0 8px var(--yl)}100%{box-shadow:0 0 20px var(--yl),inset 0 0 8px var(--yl)}}
+.digit-slot.right{border-color:var(--gr);background:#073b1f;color:var(--gr);box-shadow:0 0 18px var(--gr)}
+.digit-slot.wrong{border-color:#ff3b5c;background:#440b18;color:#ff8598;animation:sh .4s}
+@keyframes sh{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+.col-tag{position:absolute;bottom:-18px;font-size:0.65rem;color:#7e9ec9;font-weight:800}
+
+/* Apoyo Visual para Infantil (3-4 y 4-5 años) */
+.visual-toys{
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin:10px 0;background:#0c194488;padding:8px 16px;border-radius:16px;border:1.5px dashed #2b4b96
+}
+.toy-cluster{display:flex;gap:4px;align-items:center;background:#071030;padding:4px 8px;border-radius:10px}
+.toy-emoji{font-size:1.8rem;filter:drop-shadow(0 2px 4px #0008)}
+.toy-op{font-size:1.8rem;font-weight:800;color:var(--yl)}
+
+/* Teclado Numérico en Pantalla */
+.keypad{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:320px;margin:14px auto 6px auto
+}
+.kp-btn{
+  height:54px;border-radius:16px;border:0;border-bottom:4px solid #143570;
+  background:linear-gradient(#1e468f,#102a5e);color:#fff;font-size:1.7rem;font-weight:800;
+  display:grid;place-items:center;box-shadow:0 3px 6px #0006;transition:transform .08s
+}
+.kp-btn:active{transform:translateY(3px);border-bottom-width:1px}
+.kp-btn.del{background:linear-gradient(#c23b3b,#821515);border-bottom-color:#4a0909;font-size:1.4rem}
+.kp-btn.ok{background:linear-gradient(#2ecc71,#169e50);border-bottom-color:#0b5c2c;font-size:1.6rem}
+
+/* Galería de Avatares */
+.avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;margin:16px 0}
+.av-card{
+  background:#091438;border:3px solid #233c7a;border-radius:18px;padding:8px 4px;
+  text-align:center;cursor:pointer;transition:all .15s
+}
+.av-card svg{width:60px;height:60px;border-radius:50%;display:block;margin:0 auto 4px auto}
+.av-card span{display:block;font-size:0.75rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.av-card.on{border-color:var(--acc);box-shadow:0 0 16px var(--acc);background:#102869;transform:scale(1.05)}
+
+/* Perfiles */
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:16px 0}
+.prof-card{
+  background:#0c1634;border:3px solid #2b3a6b;border-radius:20px;padding:12px 8px;text-align:center;
+  cursor:pointer;transition:0.15s;position:relative
+}
+.prof-card:active{transform:scale(0.96);border-color:var(--acc)}
+.prof-card svg{width:70px;height:70px;border-radius:50%;margin:0 auto 6px auto;display:block}
+.prof-card b{display:block;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prof-card .age-tag{font-size:0.7rem;color:var(--yl);font-weight:800}
+.prof-card .del{color:#ff4f70;font-size:0.78rem;margin-top:6px;text-decoration:underline;cursor:pointer}
+.prof-card.add{border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:140px;color:var(--acc)}
+
+/* Subniveles */
+.sub-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0}
+.sub-btn{
+  aspect-ratio:1;border-radius:14px;border:3px solid #2b3a6b;background:#0a1330;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;
+  cursor:pointer;transition:transform .1s
+}
+.sub-btn.on{border-color:var(--acc);box-shadow:0 0 12px var(--acc)}
+.sub-btn.lock{opacity:0.4;filter:grayscale(1);cursor:not-allowed}
+.sub-btn b{font-size:1.15rem;line-height:1.1}
+.sub-btn .sts{font-size:0.75rem;color:var(--yl)}
+
+/* Modal de Celebración */
+#modal-overlay{
+  position:fixed;inset:0;background:#000c;backdrop-filter:blur(6px);z-index:100;
+  display:grid;place-items:center;padding:16px;opacity:0;pointer-events:none;transition:0.3s
+}
+#modal-overlay.s{opacity:1;pointer-events:all}
+.modal-box{
+  background:#0c1634;border:4px solid var(--acc);border-radius:28px;padding:24px 20px;
+  text-align:center;max-width:440px;width:100%;box-shadow:0 0 40px var(--acc);position:relative;overflow:hidden
+}
+.confetti{position:absolute;width:10px;height:10px;border-radius:2px;animation:cfall 3s linear infinite}
+@keyframes cfall{0%{transform:translateY(-100px) rotate(0deg);opacity:1}100%{transform:translateY(500px) rotate(720deg);opacity:0}}
+
+/* Tienda */
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:12px 0}
+.shop-card{
+  background:#0a1330;border:3px solid #2a6cff;border-radius:18px;padding:8px;text-align:center;
+  box-shadow:0 0 12px #2a6cff44
+}
+.shop-card svg{width:54px;height:54px;margin:0 auto 4px auto;display:block}
+.shop-card b{display:block;font-size:0.95rem}
+.shop-buy-btn{
+  margin-top:6px;padding:4px 12px;border-radius:20px;font-weight:800;font-size:0.85rem;
+  border:0;background:linear-gradient(#35e07a,#13a34f);color:#04301a;display:inline-flex;align-items:center;gap:4px
+}
+.shop-buy-btn.ow{background:#2a6cff;color:#fff}
+
+#msg{
+  position:fixed;top:calc(56px + var(--safe-top));left:50%;transform:translate(-50%,-20px);
+  opacity:0;transition:.3s;background:#050c22ee;border:2.5px solid var(--gr);padding:8px 20px;
+  border-radius:30px;z-index:90;font-weight:800;font-size:1.05rem;pointer-events:none;text-align:center;max-width:92vw
+}
 #msg.s{opacity:1;transform:translate(-50%,0)}
-#fx{position:fixed;inset:0;pointer-events:none;z-index:8}
-.fo{animation:fo .7s}@keyframes fo{0%{box-shadow:inset 0 0 140px #39ff88}100%{box-shadow:inset 0 0 0 #39ff8800}}
-.fb{animation:fb .7s}@keyframes fb{0%{box-shadow:inset 0 0 140px #ff4fa3}100%{box-shadow:inset 0 0 0 #ff4fa300}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:80}
+.fo{animation:fo .7s}@keyframes fo{0%{box-shadow:inset 0 0 120px #39ff88}100%{box-shadow:inset 0 0 0 transparent}}
+.fb{animation:fb .7s}@keyframes fb{0%{box-shadow:inset 0 0 120px #ff4fa3}100%{box-shadow:inset 0 0 0 transparent}}
 
-/* --- Nuevos estilos para perfiles y niveles --- */
-.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:15px;margin:20px 0}
-.prof-card{background:#0c1634;border:3px solid #2b3a6b;border-radius:20px;padding:12px;text-align:center;transition:0.2s}
-.prof-card img{width:80px;height:80px;border-radius:50%;background:#000;border:3px solid #fff3;margin-bottom:8px}
-.prof-card:active{transform:scale(0.95);border-color:var(--acc)}
-.prof-card.add{border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--acc)}
-.prof-card b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prof-card .del{color:#ff3b5c;font-size:0.8rem;margin-top:8px;text-decoration:underline}
-
-.form-group{margin:15px 0;text-align:left}
-.form-group label{display:block;margin-bottom:6px;font-weight:800}
-input[type="text"]{width:100%;padding:12px 20px;border-radius:30px;border:3px solid #2b3a6b;background:#050a1c;color:#fff;font:inherit;font-weight:800}
+.card{background:#0c1634;border:2.5px solid #2b3a6b;border-radius:20px;padding:16px;margin:10px 0;text-align:center}
+.form-group{margin:12px 0;text-align:left}
+.form-group label{display:block;margin-bottom:6px;font-weight:800;font-size:0.95rem}
+input[type="text"]{
+  width:100%;padding:12px 18px;border-radius:24px;border:3px solid #2b3a6b;
+  background:#050a1c;color:#fff;font:inherit;font-weight:800;font-size:1.1rem
+}
 input[type="text"]:focus{border-color:var(--acc);outline:none}
 
-.avatar-sel{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}
-.avatar-sel img{width:60px;height:60px;border-radius:50%;border:4px solid transparent;cursor:pointer}
-.avatar-sel img.on{border-color:var(--acc);box-shadow:0 0 12px var(--acc)}
-
-.sub-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:15px 0}
-.sub-btn{aspect-ratio:1;border-radius:12px;border:3px solid #2b3a6b;background:#0a1330;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px}
-.sub-btn.on{border-color:var(--acc);box-shadow:0 0 10px var(--acc)}
-.sub-btn.lock{opacity:0.5;filter:grayscale(1)}
-.sub-btn b{font-size:1.2rem}
-.sub-btn .sts{font-size:0.6rem;color:var(--yl)}
-
-/* Modal de celebración */
-#modal-overlay{position:fixed;inset:0;background:#000b;z-index:100;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:0.3s}
-#modal-overlay.s{opacity:1;pointer-events:all}
-.modal-box{background:#0c1634;border:4px solid var(--acc);border-radius:30px;padding:30px;text-align:center;max-width:500px;width:100%;box-shadow:0 0 50px var(--acc);position:relative;overflow:hidden}
-.confetti{position:absolute;width:10px;height:10px;border-radius:2px;animation:confetti-fall 3s linear infinite}
-@keyframes confetti-fall{0%{transform:translateY(-100px) rotate(0deg);opacity:1}100%{transform:translateY(500px) rotate(720deg);opacity:0}}
-
-@media(max-width:520px){.stage .hero{height:72%}.mb{width:170px;font-size:1.1rem}}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
-</style></head><body>
+#hand{
+  position:fixed;left:0;top:0;width:52px;height:52px;transition:transform .4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index:50;pointer-events:none;transform:translate(8px,calc(100vh - 68px));filter:drop-shadow(0 0 8px var(--acc))
+}
+</style>
+</head>
+<body>
 <header>
-    <button id="bk" hidden onclick="back()" aria-label="Volver">←</button>
-    <div class="pill" id="coins" aria-live="polite"><i class="cn">$</i><b id="cv">0</b></div>
-    <div id="hud"></div>
+  <button id="bk" hidden onclick="back()" aria-label="Volver">←</button>
+  <div class="pill" id="coins" aria-live="polite"><i class="cn">$</i><b id="cv">0</b></div>
+  <div id="hud"></div>
 </header>
-<div id="msg" role="status" aria-live="polite"></div><div id="fx"></div>
+<div id="msg" role="status" aria-live="polite"></div>
+<div id="fx"></div>
 <main id="m"></main>
+<div id="hand"></div>
 
 <div id="modal-overlay">
-    <div class="modal-box" id="modal-content"></div>
+  <div class="modal-box" id="modal-content"></div>
 </div>
 
 <script>
-/* --- Assets & Data --- */
-const IM={"hugG": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCADKAKUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5WaCWI5STj3qRZZNvzpVlyDgCm7ctjtiupxM7nV2Hj7VhpSaTrENtr2nRjEcOoLvMY9FfqPxzSHXPC2cr4CsQT1/0hv8ACuX8pfTB9qeoI4P511rF1oq17+qT/NHJLC0pO9reja/JnTDxF4TQ/P8AD6z+pnYj+VJJ4n8LsuE8B6bj3kaucxgVBLAG6DafUUnjKr3t9y/yBYSmtr/e/wDM228W+G4HIPw80057l2P86hvPE3h0mNz4F04ArnCOy/yrnZomMBY84OKhvhhkTHRR/Ko+t1b9P/AV/kafVabjrf8A8Cf+Z0SeKfDYP/IjWf8A3+arv/CR+GyqlfA1mMjPzSn/AAriIo90ij1NaEiFFLBc4GB7VqsZWfb/AMBj/kYvB0U+v/gUv8zqrbxhpFhK01p4J0rzsfK0qCUIfUBgRn8KzfEXjvxN4njW0vr0pZrwLeEbUx6HHb24HtXOiQDgg/WnRIXkwgLHrgVP1mrP3b/ckvyK+rUo+9bVd23+ZYEZTtxQwUj5lFbz6NdtAWWLe6MiOinLKWGVyPetSDwy0dnBJNGq3CS7mVj1UggKR9cV61PAVqnwxPNnjaVPWTOWs9NmvI5ntxxEjMcn7xAztHvzW/oXh24u7a7uZxsVYWWNJFxvY/4YPPrW6YNO0bTI9PtT51xt5cevOWPPX09sVn3+q3728aJPtJkwDnGcD69PWvWo5fCjaVXVrou55lTG1a940dE3o32/4J1Hhy00zw5Z3s3niWSQBXYHBB5wo/Ecn6U3VdAs7mwku9KgX7PcWl28rnkxsAjBOvQMpx9a4a41aYbgysiI20AtncSDls+pNej+BNfgTS3tptsjSSeUAx4GT+uRxj1NGJVKpT9nBWsVQjUpVPa1Hds8Yu4J7O7lt542iljbBU9R3H6GrFjqKpOiXcAnizyM4P4Guj8c6dHb+Kr5Y0IQSFQ7PuMpHV/oTXJeWY2yRx618XPmhJo+rjaSTO2l8PaBehLi01KOAMMtHc5RlP4cGiqsGp27W8YcDKjHIorC/kb28zkRcuCCy/kalS6XeSGxnsavto1yJPJQCUOCUP3TkdiD3rJk0++iYmS0mUZxkoa6Z0qkHaSOeNWnNXizSjnQ/eIFXo", "kisG": "data:image/jpeg;base64,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"
+/* ==========================================================================
+   1. AVATARES VECTORIALES LOCALES (100% Offline, sin internet ni remoto)
+   ========================================================================== */
+const AVATARS = {
+  hug: {
+    name: "Huggy Wuggy", color: "#1976d2",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#1565c0" stroke="#0d47a1" stroke-width="4"/><path d="M22 28 Q50 6 78 28 Q78 80 50 88 Q22 80 22 28" fill="#1976d2"/><circle cx="36" cy="40" r="10" fill="#fff"/><circle cx="64" cy="40" r="10" fill="#fff"/><circle cx="37" cy="40" r="4.5" fill="#000"/><circle cx="63" cy="40" r="4.5" fill="#000"/><path d="M28 58 Q50 82 72 58 Q50 66 28 58" fill="#c2185b"/><path d="M30 58 Q50 72 70 58" stroke="#fff" stroke-width="3" stroke-dasharray="3,2" fill="none"/><polygon points="42,78 50,84 58,78 50,74" fill="#ffd600"/><polygon points="42,88 50,84 58,88 50,92" fill="#ffd600"/></svg>`
+  },
+  kis: {
+    name: "Kissy Missy", color: "#e91e63",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#ad1457" stroke="#880e4f" stroke-width="4"/><path d="M22 28 Q50 6 78 28 Q78 80 50 88 Q22 80 22 28" fill="#ec407a"/><circle cx="36" cy="40" r="10" fill="#fff"/><circle cx="64" cy="40" r="10" fill="#fff"/><circle cx="37" cy="40" r="4.5" fill="#000"/><circle cx="63" cy="40" r="4.5" fill="#000"/><path d="M28 32 L34 35 M66 35 L72 32" stroke="#000" stroke-width="2.5"/><path d="M32 58 Q50 82 68 58 Q50 65 32 58" fill="#880e4f"/><path d="M34 58 Q50 72 66 58" stroke="#fff" stroke-width="3" stroke-dasharray="3,2" fill="none"/><polygon points="42,78 50,84 58,78 50,74" fill="#00e5ff"/><polygon points="42,88 50,84 58,88 50,92" fill="#00e5ff"/></svg>`
+  },
+  pop: {
+    name: "Poppy", color: "#d32f2f",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#ffebee" stroke="#c62828" stroke-width="4"/><circle cx="24" cy="30" r="14" fill="#d32f2f"/><circle cx="76" cy="30" r="14" fill="#d32f2f"/><path d="M36 22 Q50 10 64 22 Q68 28 50 30 Q32 28 36 22" fill="#b71c1c"/><circle cx="50" cy="52" r="28" fill="#fff0f5"/><circle cx="38" cy="50" r="6" fill="#1976d2"/><circle cx="62" cy="50" r="6" fill="#1976d2"/><circle cx="39" cy="49" r="2" fill="#fff"/><circle cx="63" cy="49" r="2" fill="#fff"/><circle cx="32" cy="58" r="4" fill="#ff80ab" opacity="0.6"/><circle cx="68" cy="58" r="4" fill="#ff80ab" opacity="0.6"/><path d="M44 64 Q50 70 56 64" stroke="#c2185b" stroke-width="3" fill="none"/></svg>`
+  },
+  mom: {
+    name: "Mommy Long", color: "#f06292",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#c2185b" stroke="#880e4f" stroke-width="4"/><circle cx="50" cy="48" r="26" fill="#f48fb1"/><path d="M30 26 Q50 14 70 26 Q60 38 50 36 Q40 38 30 26" fill="#ad1457"/><circle cx="38" cy="46" r="7" fill="#00e676"/><circle cx="62" cy="46" r="7" fill="#00e676"/><circle cx="38" cy="46" r="3" fill="#004d40"/><circle cx="62" cy="46" r="3" fill="#004d40"/><path d="M42 58 Q50 68 58 58" stroke="#880e4f" stroke-width="3" fill="none"/></svg>`
+  },
+  cat: {
+    name: "CatNap", color: "#7b1fa2",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#4a148c" stroke="#311b92" stroke-width="4"/><polygon points="20,18 36,36 18,38" fill="#6a1b9a"/><polygon points="80,18 64,36 82,38" fill="#6a1b9a"/><circle cx="50" cy="54" r="32" fill="#7b1fa2"/><path d="M32 44 Q40 40 44 46" stroke="#000" stroke-width="4" fill="none"/><path d="M68 44 Q60 40 56 46" stroke="#000" stroke-width="4" fill="none"/><path d="M28 56 Q50 86 72 56 Z" fill="#1a0033"/><circle cx="50" cy="84" r="6" fill="#ffd600"/><path d="M50 80 A4 4 0 0 0 50 88 A3 3 0 0 1 50 80" fill="#4a148c"/></svg>`
+  },
+  dog: {
+    name: "DogDay", color: "#f57c00",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#e65100" stroke="#bf360c" stroke-width="4"/><ellipse cx="20" cy="44" rx="8" ry="18" fill="#5d4037" transform="rotate(-15 20 44)"/><ellipse cx="80" cy="44" rx="8" ry="18" fill="#ffb74d" transform="rotate(15 80 44)"/><circle cx="50" cy="50" r="32" fill="#fb8c00"/><circle cx="38" cy="44" r="7" fill="#000"/><circle cx="62" cy="44" r="7" fill="#000"/><circle cx="40" cy="42" r="2.5" fill="#fff"/><circle cx="64" cy="42" r="2.5" fill="#fff"/><ellipse cx="50" cy="54" rx="8" ry="5" fill="#3e2723"/><path d="M38 60 Q50 74 62 60" fill="#c2185b"/><circle cx="50" cy="84" r="6" fill="#ffd600"/></svg>`
+  },
+  bun: {
+    name: "Bunzo Bunny", color: "#fbc02d",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#f57f17" stroke="#e65100" stroke-width="4"/><ellipse cx="32" cy="22" rx="7" ry="20" fill="#fbc02d"/><ellipse cx="32" cy="22" rx="4" ry="15" fill="#f48fb1"/><ellipse cx="68" cy="22" rx="7" ry="20" fill="#fbc02d"/><ellipse cx="68" cy="22" rx="4" ry="15" fill="#f48fb1"/><polygon points="44,30 50,10 56,30" fill="#00e5ff"/><circle cx="50" cy="10" r="3" fill="#ff1744"/><circle cx="50" cy="56" r="30" fill="#fbc02d"/><circle cx="38" cy="52" r="7" fill="#000"/><circle cx="62" cy="52" r="7" fill="#000"/><circle cx="40" cy="50" r="2.5" fill="#fff"/><circle cx="64" cy="50" r="2.5" fill="#fff"/><circle cx="30" cy="62" r="5" fill="#ff8a80"/><circle cx="70" cy="62" r="5" fill="#ff8a80"/><ellipse cx="50" cy="60" rx="5" ry="3" fill="#d81b60"/><path d="M44 64 Q50 70 56 64" stroke="#000" stroke-width="2.5" fill="none"/></svg>`
+  },
+  box: {
+    name: "Boxy Boo", color: "#00b0ff",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0091ea" stroke="#01579b" stroke-width="4"/><rect x="24" y="30" width="52" height="48" rx="8" fill="#d50000" stroke="#ffd600" stroke-width="3"/><path d="M24 50 L76 50 M50 30 L50 78" stroke="#ffd600" stroke-width="3"/><circle cx="38" cy="42" r="6" fill="#fff"/><circle cx="62" cy="42" r="6" fill="#fff"/><circle cx="38" cy="42" r="3" fill="#000"/><circle cx="62" cy="42" r="3" fill="#000"/><path d="M36 60 Q50 72 64 60" fill="#212121"/><polygon points="42,60 45,64 48,60" fill="#fff"/><polygon points="52,60 55,64 58,60" fill="#fff"/><path d="M76 44 Q88 38 84 52" stroke="#ffd600" stroke-width="4" fill="none"/></svg>`
+  },
+  cra: {
+    name: "CraftyCorn", color: "#e1bee7",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#ab47bc" stroke="#6a1b9a" stroke-width="4"/><circle cx="50" cy="56" r="30" fill="#fff"/><polygon points="46,36 50,10 54,36" fill="#ffd600"/><ellipse cx="36" cy="52" rx="6" ry="8" fill="#00bcd4"/><ellipse cx="64" cy="52" rx="6" ry="8" fill="#00bcd4"/><circle cx="38" cy="50" r="2" fill="#fff"/><circle cx="66" cy="50" r="2.5" fill="#fff"/><path d="M30 46 L34 42 M66 42 L70 46" stroke="#000" stroke-width="2"/><ellipse cx="50" cy="66" rx="10" ry="6" fill="#f8bbd0"/><circle cx="46" cy="66" r="1.5" fill="#ad1457"/><circle cx="54" cy="66" r="1.5" fill="#ad1457"/></svg>`
+  },
+  rob: {
+    name: "GrabPack Player", color: "#29b6f6",
+    svg: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0277bd" stroke="#01579b" stroke-width="4"/><rect x="28" y="24" width="44" height="42" rx="14" fill="#37474f"/><rect x="34" y="32" width="32" height="18" rx="8" fill="#00e5ff"/><path d="M38 36 L44 36" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="64" r="10" fill="#1976d2"/><circle cx="80" cy="64" r="10" fill="#d50000"/><rect x="40" y="66" width="20" height="18" rx="4" fill="#ffb300"/><circle cx="50" cy="74" r="4" fill="#fff"/></svg>`
+  }
+};
+
+const getAvatarSVG = id => (AVATARS[id] || AVATARS.hug).svg;
+
+/* ==========================================================================
+   2. CONFIGURACIÓN DE EDADES Y NIVELES PROGRESIVOS (3, 4, 5, 6 y 7-8 años)
+   ========================================================================== */
+const AGE_GROUPS = {
+  "3-4": {
+    name: "3-4 Años",
+    tag: "🐣 Infantil",
+    title: "Jardín de Juguetes",
+    desc: "Aprende a contar y primeras sumas sencillas del 1 al 5 con apoyo de juguetes.",
+    color: "#ffc43a",
+    subs: [
+      { name: "1.1", type: "count", min: 1, max: 3, desc: "Cuenta los juguetes (del 1 al 3)" },
+      { name: "1.2", type: "+", aMin: 1, aMax: 2, bMin: 1, bMax: 1, maxRes: 3, desc: "Sumas pequeñitas (hasta 3)" },
+      { name: "1.3", type: "count", min: 2, max: 5, desc: "Cuenta los juguetes (del 1 al 5)" },
+      { name: "1.4", type: "+", aMin: 1, aMax: 3, bMin: 1, bMax: 2, maxRes: 5, desc: "Sumas con juguetes (hasta 5)" },
+      { name: "1.5", type: "-", aMin: 2, aMax: 5, bMin: 1, bMax: 2, desc: "Primeras restas (hasta 5)" }
+    ]
+  },
+  "4-5": {
+    name: "4-5 Años",
+    tag: "🐥 Preescolar",
+    title: "Taller de Bloques",
+    desc: "Sumas y restas básicas hasta el número 10 sin llevadas.",
+    color: "#2ecc71",
+    subs: [
+      { name: "2.1", type: "+", aMin: 1, aMax: 3, bMin: 1, bMax: 3, maxRes: 6, desc: "Sumas fáciles hasta 6" },
+      { name: "2.2", type: "-", aMin: 3, aMax: 6, bMin: 1, bMax: 3, desc: "Restas fáciles hasta 6" },
+      { name: "2.3", type: "+", aMin: 2, aMax: 6, bMin: 1, bMax: 4, maxRes: 10, desc: "Sumas hasta el 10" },
+      { name: "2.4", type: "-", aMin: 5, aMax: 10, bMin: 1, bMax: 4, desc: "Restas hasta el 10" },
+      { name: "2.5", type: "mix", aMin: 3, aMax: 9, bMin: 1, bMax: 4, maxRes: 10, desc: "Desafío Mixto hasta 10" }
+    ]
+  },
+  "5-6": {
+    name: "5-6 Años",
+    tag: "🦊 1º Primaria",
+    title: "Aventuras en la Fábrica",
+    desc: "Cálculo en columnas (Decenas y Unidades) hasta el 20 sin llevadas.",
+    color: "#ff3fa4",
+    subs: [
+      { name: "3.1", type: "+", aMin: 10, aMax: 10, bMin: 1, bMax: 9, desc: "Decenas con Unidades (10 + ?)" },
+      { name: "3.2", type: "+", aMin: 11, aMax: 16, bMin: 1, bMax: 3, carry: 0, maxRes: 19, desc: "Sumas verticales hasta 20" },
+      { name: "3.3", type: "-", aMin: 12, aMax: 19, bMin: 1, bMax: 5, carry: 0, desc: "Restas verticales hasta 20" },
+      { name: "3.4", type: "-", aMin: 15, aMax: 19, bMin: 10, bMax: 14, desc: "Restas de 2 cifras (hasta 20)" },
+      { name: "3.5", type: "mix", aMin: 10, aMax: 16, bMin: 1, bMax: 3, maxRes: 20, carry: 0, desc: "Reto Especial hasta 20" }
+    ]
+  },
+  "7-8": {
+    name: "7-8 Años",
+    tag: "🚀 2º Primaria",
+    title: "Maestro del GrabPack",
+    desc: "Sumas con llevadas y restas con préstamos de 2 y 3 cifras.",
+    color: "#19a7ff",
+    subs: [
+      { name: "4.1", type: "+", min: 12, max: 48, carry: 0, desc: "Sumas de 2 cifras (sin llevada)" },
+      { name: "4.2", type: "+", min: 25, max: 88, carry: 1, desc: "Sumas de 2 cifras (con 1 llevada)" },
+      { name: "4.3", type: "-", min: 32, max: 88, carry: 0, desc: "Restas de 2 cifras (sin préstamo)" },
+      { name: "4.4", type: "-", min: 34, max: 92, carry: 1, desc: "Restas de 2 cifras (con préstamo)" },
+      { name: "4.5", type: "mix", min: 110, max: 650, carry: 2, desc: "Gran Reto: Sumas y Restas de 3 cifras" }
+    ]
+  }
+};
+
+/* ==========================================================================
+   3. GESTOR DE PERFILES Y PERSISTENCIA LOCAL (localStorage)
+   ========================================================================== */
+const $ = s => document.querySelector(s);
+const R = (a,b) => a + Math.floor(Math.random()*(b-a+1));
+const pick = a => a[R(0, a.length-1)];
+
+let P = [], A = null, G = null, T = null, scr = "";
+
+const PM = {
+  load() {
+    try {
+      P = JSON.parse(localStorage.getItem("pp_profiles") || "[]");
+      A = localStorage.getItem("pp_active_id");
+    } catch(e) { P = []; }
+  },
+  save() {
+    try {
+      localStorage.setItem("pp_profiles", JSON.stringify(P));
+      if(A) localStorage.setItem("pp_active_id", A);
+    } catch(e) {}
+  },
+  get cur() {
+    return P.find(p => p.id === A) || null;
+  },
+  create(name, avatar, age) {
+    const p = {
+      id: Date.now().toString(),
+      name: name || "Jugador",
+      avatar: avatar || "hug",
+      age: age || "7-8",
+      coins: 0,
+      hand: "#19a7ff",
+      st: [],
+      prog: { "3-4": {}, "4-5": {}, "5-6": {}, "7-8": {} },
+      snd: 1
+    };
+    P.push(p);
+    A = p.id;
+    this.save();
+    return p;
+  },
+  del(id) {
+    P = P.filter(p => p.id !== id);
+    if(A === id) A = P.length ? P[0].id : null;
+    this.save();
+    title();
+  }
+};
+
+/* ==========================================================================
+   4. AUDIO SINTETIZADO (Web Audio API - 100% Local y Procedural)
+   ========================================================================== */
+let AC = null;
+function beep(freq, dur = 0.12, type = "square") {
+  if(!PM.cur || !PM.cur.snd) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if(AC.state === "suspended") AC.resume();
+    const osc = AC.createOscillator();
+    const gain = AC.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, AC.currentTime);
+    gain.gain.setValueAtTime(0.05, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, AC.currentTime + dur);
+    osc.connect(gain);
+    gain.connect(AC.destination);
+    osc.start();
+    osc.stop(AC.currentTime + dur);
+  } catch(e) {}
 }
+
+const clickSound = () => beep(520, 0.05, "sine");
+const ok = () => { beep(660, 0.12, "sine"); setTimeout(() => beep(880, 0.18, "sine"), 100); };
+const bad = () => beep(200, 0.25, "triangle");
+const fanfare = () => {
+  [523, 659, 783, 1046].forEach((f, i) => setTimeout(() => beep(f, 0.25, "sine"), i * 140));
+};
+
+/* ==========================================================================
+   5. MOTOR DE GENERACIÓN ARITMÉTICA
+   ========================================================================== */
+const TOY_EMOJIS = ["🧸","⭐","🎈","🚗","🍎","🎁","🤖","🍩","🐱","🚀"];
+
+function genMath(ageKey, subIndex) {
+  const cfg = AGE_GROUPS[ageKey].subs[subIndex];
+  let t = cfg.type === "mix" ? (Math.random() < 0.5 ? "+" : "-") : cfg.type;
+  let a, b, r;
+  let iters = 0;
+  
+  const aMin = cfg.aMin !== undefined ? cfg.aMin : (cfg.min !== undefined ? cfg.min : 1);
+  const aMax = cfg.aMax !== undefined ? cfg.aMax : (cfg.max !== undefined ? cfg.max : 10);
+  const bMin = cfg.bMin !== undefined ? cfg.bMin : 1;
+  const bMax = cfg.bMax !== undefined ? cfg.bMax : (cfg.max !== undefined ? cfg.max : 9);
+  
+  do {
+    iters++;
+    if(iters > 10000) break;
+    
+    if(t === "count") {
+      a = R(aMin, aMax);
+      b = 0;
+      r = a;
+      const emoji = pick(TOY_EMOJIS);
+      return { type: "count", a, b, r, ans: a, t: "conteo", emoji, isLittle: true };
+    }
+    
+    if(t === "+") {
+      a = R(aMin, aMax);
+      b = R(bMin, bMax);
+      r = a + b;
+      if(cfg.maxRes && r > cfg.maxRes) continue;
+      if(cfg.carry === 0 && (a % 10 + b % 10 >= 10 || Math.floor(a/10)%10 + Math.floor(b/10)%10 >= 10)) continue;
+      if(cfg.carry === 1 && (a % 10 + b % 10 < 10)) continue;
+      if(cfg.carry === 2 && (a % 10 + b % 10 < 10 || Math.floor(a/10)%10 + Math.floor(b/10)%10 < 10)) continue;
+    } else {
+      a = R(aMin, aMax);
+      b = R(bMin, Math.min(a - 1, bMax));
+      r = a - b;
+      if(r < 0) continue;
+      if(cfg.carry === 0 && (a % 10 < b % 10 || Math.floor(a/10)%10 < Math.floor(b/10)%10)) continue;
+      if(cfg.carry === 1 && (a % 10 >= b % 10)) continue;
+      if(cfg.carry === 2 && (a % 10 >= b % 10 || Math.floor(a/10)%10 >= Math.floor(b/10)%10)) continue;
+    }
+    if(r < 0 || r > 999) continue;
+    break;
+  } while(1);
+  
+  const isLittle = ageKey === "3-4" || ageKey === "4-5";
+  const emoji = pick(TOY_EMOJIS);
+  return { type: "op", t, a, b, r, ans: r, isLittle, emoji };
+}
+
+/* ==========================================================================
+   6. NAVEGACIÓN Y VISTAS
+   ========================================================================== */
+function go(screenName, htmlContent, hudContent) {
+  scr = screenName;
+  $("#m").innerHTML = htmlContent;
+  $("#hud").innerHTML = hudContent || "";
+  if(PM.cur) {
+    $("#hud").innerHTML += `<div class="user-pill" onclick="loginView()">
+      <div class="av-mini">${getAvatarSVG(PM.cur.avatar)}</div>
+      <span>${PM.cur.name}</span>
+    </div>`;
+    $("#cv").textContent = PM.cur.coins;
+  }
+  $("#bk").hidden = (screenName === "title" || screenName === "load" || screenName === "login");
+  window.scrollTo(0,0);
+}
+
+function fx(cls) {
+  const e = $("#fx");
+  e.className = "";
+  void e.offsetWidth;
+  e.className = cls;
+}
+
+let msgTimer = null;
+function say(text) {
+  const e = $("#msg");
+  e.textContent = text;
+  e.className = "s";
+  clearTimeout(msgTimer);
+  msgTimer = setTimeout(() => e.className = "", 2300);
+}
+
+function coinsUI() {
+  if(!PM.cur) return;
+  $("#cv").textContent = PM.cur.coins;
+  const c = $("#coins");
+  c.classList.remove("bump");
+  void c.offsetWidth;
+  c.classList.add("bump");
+}
+
+const HAND_SVG = color => `<svg viewBox="0 0 64 64" style="width:100%;height:100%"><g fill="${color}" stroke="#0a0f1d" stroke-width="3" stroke-linejoin="round"><rect x="16" y="8" width="7" height="26" rx="3.5"/><rect x="25" y="4" width="7" height="30" rx="3.5"/><rect x="34" y="6" width="7" height="28" rx="3.5"/><rect x="43" y="12" width="7" height="24" rx="3.5"/><rect x="6" y="28" width="22" height="9" rx="4.5" transform="rotate(-25 14 32)"/><rect x="16" y="28" width="34" height="28" rx="9"/></g></svg>`;
+
+/* Pantalla de Carga */
+function load() {
+  PM.load();
+  go("load", `<div class="stage">
+    <div class="lg">
+      <div class="lg1"><b>P</b>laytime<span>CO.</span></div>
+      <div class="lg2">FÁBRICA DE MATES</div>
+    </div>
+    <div style="font-size:3rem;margin:20px;animation:slot-pulse 1s infinite alternate">🧸 ⚡ 🎒</div>
+    <div style="font-weight:800;color:var(--yl)">Cargando Fábrica de Mates...</div>
+  </div>`);
+  setTimeout(() => {
+    if(scr === "load") title();
+  }, 1200);
+}
+
+/* Pantalla Principal */
+function title() {
+  stop();
+  if(!PM.cur) {
+    if(P.length === 0) return createProfileView();
+    return loginView();
+  }
+  
+  const curAge = PM.cur.age || "7-8";
+  const ageObj = AGE_GROUPS[curAge];
+  
+  go("title", `<div class="stage">
+    <div class="lg">
+      <div class="lg1"><b>P</b>laytime<span>CO.</span></div>
+      <div class="lg2">FÁBRICA DE MATES</div>
+    </div>
+    
+    <div class="card" style="width:100%;max-width:320px;padding:10px 14px;background:#0c173ebb;border-color:var(--acc);margin-bottom:14px">
+      <div style="font-size:0.85rem;color:#a5c7f2;font-weight:700">Modo de Aprendizaje:</div>
+      <div style="font-weight:800;font-size:1.15rem;color:${ageObj.color}">${ageObj.tag} · ${ageObj.title}</div>
+      <div style="font-size:0.75rem;color:#d0e2fa">${ageObj.desc}</div>
+    </div>
+    
+    <div class="mbs">
+      <button class="mb g" onclick="levelMap('${curAge}')"><i>▶</i>JUGAR</button>
+      <button class="mb p" onclick="ageSelectView()"><i>🎯</i>CAMBIAR EDAD</button>
+      <button class="mb o" onclick="loginView()"><i>👤</i>PERFILES</button>
+      <button class="mb b" onclick="shop()"><i>🧸</i>TIENDA</button>
+    </div>
+  </div>`);
+  
+  $("#hand").innerHTML = HAND_SVG(PM.cur.hand);
+}
+
+/* Selección de Edad / Nivel */
+function ageSelectView() {
+  go("ages", `<h2 class="tt">Elige tu Edad y Nivel</h2>
+  <div class="stt">Selecciona tu grupo para adaptar las operaciones</div>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:380px;margin:0 auto">
+    ${Object.keys(AGE_GROUPS).map(k => {
+      const g = AGE_GROUPS[k];
+      const isSel = PM.cur && PM.cur.age === k;
+      return `<div class="card" style="margin:0;cursor:pointer;border-color:${isSel ? 'var(--yl)' : g.color};border-width:${isSel?'3.5px':'2px'};text-align:left;display:flex;align-items:center;gap:14px" onclick="setAge('${k}')">
+        <div style="font-size:2.4rem;padding:6px;background:#061033;border-radius:16px">${k==='3-4'?'🐣':k==='4-5'?'🐥':k==='5-6'?'🦊':'🚀'}</div>
+        <div style="flex:1">
+          <div style="font-size:1.15rem;font-weight:800;color:${g.color}">${g.tag} (${g.name})</div>
+          <b style="color:#fff">${g.title}</b>
+          <div style="font-size:0.78rem;color:#a2c4ed">${g.desc}</div>
+        </div>
+        ${isSel ? '<div style="font-size:1.5rem;color:var(--yl)">✔</div>' : ''}
+      </div>`;
+    }).join("")}
+  </div>
+  <div style="text-align:center;margin-top:16px">
+    <button class="btn" onclick="title()">VOLVER</button>
+  </div>`);
+}
+
+function setAge(ageKey) {
+  if(!PM.cur) return;
+  PM.cur.age = ageKey;
+  PM.save();
+  ok();
+  say("¡Nivel actualizado a " + AGE_GROUPS[ageKey].name + "!");
+  levelMap(ageKey);
+}
+
+/* Selector de Subniveles */
+function levelMap(ageKey) {
+  const g = AGE_GROUPS[ageKey];
+  const subs = g.subs;
+  if(!PM.cur.prog[ageKey]) PM.cur.prog[ageKey] = {};
+  
+  go("map", `<h2 class="tt" style="color:${g.color}">${g.tag} · ${g.title}</h2>
+  <div class="stt">${g.desc}</div>
+  <div class="card">
+    <div class="sub-grid">
+      ${subs.map((s, i) => {
+        const prog = PM.cur.prog[ageKey][i] || { stars: 0 };
+        const unlocked = i === 0 || (PM.cur.prog[ageKey][i-1] && PM.cur.prog[ageKey][i-1].stars > 0);
+        return `<button class="sub-btn ${unlocked ? 'on' : 'lock'}" onclick="${unlocked ? `play('${ageKey}', ${i})` : ''}">
+          <b>${s.name}</b>
+          <div class="sts">${"★".repeat(prog.stars)}${"☆".repeat(5 - prog.stars)}</div>
+        </button>`;
+      }).join("")}
+    </div>
+    <div style="margin-top:10px;font-size:0.9rem;color:#bad4f5" id="sub-desc">${subs[0].desc}</div>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center">
+      <button class="btn pk" onclick="ageSelectView()">Cambiar Edad</button>
+      <button class="btn" onclick="title()">Menú</button>
+    </div>
+  </div>`);
+}
+
+/* ==========================================================================
+   7. LÓGICA DE JUEGO Y ESCRITURA DÍGITO A DÍGITO
+   ========================================================================== */
+function stop() {
+  if(T) cancelAnimationFrame(T);
+  if(G && G.to) clearTimeout(G.to);
+}
+
+function play(ageKey, subIndex) {
+  stop();
+  G = {
+    ageKey,
+    sub: subIndex,
+    n: 0,
+    e: 0,
+    lock: 0,
+    o: null,
+    digits: [],
+    curSlot: 0,
+    carries: [0, 0]
+  };
+  nextQuestion(true);
+}
+
+function nextQuestion(first) {
+  G.lock = 0;
+  G.carries = [0, 0];
+  G.o = genMath(G.ageKey, G.sub);
+  
+  const o = G.o;
+  const ansStr = String(o.ans);
+  const numDigits = ansStr.length;
+  
+  // Digits array: index 0 = Units (derecha), index 1 = Tens, index 2 = Hundreds
+  G.digits = Array(numDigits).fill("");
+  G.curSlot = 0; // Se empieza por las UNIDADES
+  
+  const cfg = AGE_GROUPS[G.ageKey].subs[G.sub];
+  const hText = first ? cfg.desc : (o.type === "count" ? "¿Cuántos juguetes ves? Cuenta y escribe el número." : "Calcula escribiendo cada dígito:");
+  
+  const hud = `<div class="pill" aria-label="Progreso">${"⭐".repeat(G.n)}${"☆".repeat(5 - G.n)}</div>`;
+  
+  go("game", `<div class="game-container">
+    <div class="hn" style="text-align:center;font-size:1.05rem;font-weight:800;color:var(--yl);margin-bottom:10px">${hText}</div>
+    ${renderOperationBoard(o, numDigits)}
+    ${renderKeypad()}
+  </div>`, hud);
+}
+
+function renderOperationBoard(o, numDigits) {
+  if(o.type === "count") {
+    // Modo Conteo Infantil (3-4 años)
+    const toysHTML = Array(o.a).fill(0).map(() => `<span class="toy-emoji">${o.emoji}</span>`).join(" ");
+    return `<div class="op-board">
+      <div class="visual-toys" style="margin-bottom:14px">${toysHTML}</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#bad4f5;margin-bottom:6px">Escribe el total:</div>
+      <div class="slots-row">
+        <div class="digit-slot active-slot" id="slot-0" onclick="selectSlot(0)">?</div>
+      </div>
+    </div>`;
+  }
+  
+  // Modo Operación Aritmética
+  let visualAid = "";
+  if(o.isLittle) {
+    const aToys = Array(o.a).fill(0).map(() => `<span class="toy-emoji">${o.emoji}</span>`).join("");
+    const bToys = Array(o.b).fill(0).map(() => `<span class="toy-emoji">${o.emoji}</span>`).join("");
+    visualAid = `<div class="visual-toys">
+      <div class="toy-cluster">${aToys}</div>
+      <span class="toy-op">${o.t}</span>
+      <div class="toy-cluster">${bToys}</div>
+    </div>`;
+  }
+  
+  const carriesHTML = o.a >= 10 ? `<div class="carries-row">
+    <button class="cy" id="cy-1" onclick="toggleCarry(1)" title="Llevada Decenas"></button>
+    <button class="cy" id="cy-0" onclick="toggleCarry(0)" title="Llevada Unidades"></button>
+  </div>` : "";
+  
+  // Formato Vertical con Columnas
+  const aStr = String(o.a).padStart(numDigits, " ");
+  const bStr = String(o.b).padStart(numDigits, " ");
+  
+  const aCols = aStr.split("").map(c => `<i>${c.trim()}</i>`).join("");
+  const bCols = bStr.split("").map(c => `<i>${c.trim()}</i>`).join("");
+  
+  // Slots de respuesta generados de izquierda a derecha (Centenas, Decenas, Unidades)
+  const slotDivs = [];
+  for(let i = numDigits - 1; i >= 0; i--) {
+    const isActive = (i === 0);
+    const tag = i === 0 ? "U" : (i === 1 ? "D" : "C");
+    slotDivs.push(`<div class="digit-slot ${isActive ? 'active-slot' : ''}" id="slot-${i}" onclick="selectSlot(${i})">
+      <span id="slot-val-${i}"></span>
+      <span class="col-tag">${tag}</span>
+    </div>`);
+  }
+  
+  return `<div class="op-board">
+    ${carriesHTML}
+    ${visualAid}
+    <div class="vertical-calc" style="grid-template-columns:auto repeat(${numDigits},44px)">
+      <span class="calc-sign"> </span>${aCols}
+      <span class="calc-sign">${o.t}</span>${bCols}
+      <div class="calc-line"></div>
+    </div>
+    <div class="slots-row">
+      ${slotDivs.join("")}
+    </div>
+  </div>`;
+}
+
+function renderKeypad() {
+  return `<div class="keypad">
+    <button class="kp-btn" onclick="pressDigit(1)">1</button>
+    <button class="kp-btn" onclick="pressDigit(2)">2</button>
+    <button class="kp-btn" onclick="pressDigit(3)">3</button>
+    <button class="kp-btn" onclick="pressDigit(4)">4</button>
+    <button class="kp-btn" onclick="pressDigit(5)">5</button>
+    <button class="kp-btn" onclick="pressDigit(6)">6</button>
+    <button class="kp-btn" onclick="pressDigit(7)">7</button>
+    <button class="kp-btn" onclick="pressDigit(8)">8</button>
+    <button class="kp-btn" onclick="pressDigit(9)">9</button>
+    <button class="kp-btn del" onclick="pressDel()" aria-label="Borrar">⌫</button>
+    <button class="kp-btn" onclick="pressDigit(0)">0</button>
+    <button class="kp-btn ok" onclick="submitCheck()" aria-label="Comprobar">✓</button>
+  </div>`;
+}
+
+function toggleCarry(idx) {
+  if(G.lock) return;
+  G.carries[idx] = G.carries[idx] ? 0 : 1;
+  const el = $(`#cy-${idx}`);
+  if(el) {
+    el.classList.toggle("on", !!G.carries[idx]);
+    el.textContent = G.carries[idx] ? "1" : "";
+  }
+  clickSound();
+}
+
+function selectSlot(idx) {
+  if(G.lock) return;
+  G.curSlot = idx;
+  updateSlotsVisual();
+  clickSound();
+}
+
+function updateSlotsVisual() {
+  const numDigits = String(G.o.ans).length;
+  for(let i = 0; i < numDigits; i++) {
+    const el = $(`#slot-${i}`);
+    const vEl = $(`#slot-val-${i}`);
+    if(el) {
+      el.classList.toggle("active-slot", i === G.curSlot);
+    }
+    if(vEl) {
+      vEl.textContent = G.digits[i] !== "" ? G.digits[i] : "";
+    }
+  }
+}
+
+function pressDigit(d) {
+  if(G.lock) return;
+  clickSound();
+  
+  const numDigits = String(G.o.ans).length;
+  G.digits[G.curSlot] = d;
+  
+  const valEl = $(`#slot-val-${G.curSlot}`);
+  if(valEl) valEl.textContent = d;
+  else {
+    const s0 = $(`#slot-0`);
+    if(s0) s0.textContent = d;
+  }
+  
+  // Avanzar a la siguiente columna hacia la izquierda (U -> D -> C)
+  if(G.curSlot < numDigits - 1) {
+    G.curSlot++;
+    updateSlotsVisual();
+  }
+  
+  // Si todas las casillas están completas, comprobar automáticamente tras un breve instante
+  if(G.digits.every(v => v !== "")) {
+    G.to = setTimeout(submitCheck, 320);
+  }
+}
+
+function pressDel() {
+  if(G.lock) return;
+  clickSound();
+  G.digits[G.curSlot] = "";
+  const valEl = $(`#slot-val-${G.curSlot}`);
+  if(valEl) valEl.textContent = "";
+  else {
+    const s0 = $(`#slot-0`);
+    if(s0) s0.textContent = "?";
+  }
+  // Retroceder hacia la derecha si no está en unidades
+  if(G.curSlot > 0) {
+    G.curSlot--;
+    updateSlotsVisual();
+  }
+}
+
+function submitCheck() {
+  if(G.lock) return;
+  const numDigits = String(G.o.ans).length;
+  
+  // Convertir slots a número (slot 0 = unidades, slot 1 = decenas, etc.)
+  const userNumStr = G.digits.slice().reverse().join("");
+  if(userNumStr.length < numDigits || G.digits.some(v => v === "")) {
+    say("¡Escribe todos los números de la operación!");
+    return;
+  }
+  
+  const userVal = parseInt(userNumStr, 10);
+  G.lock = 1;
+  
+  // Animación del GrabPack hacia el resultado
+  const hand = $("#hand");
+  const targetSlot = $("#slot-0");
+  if(hand && targetSlot) {
+    const r = targetSlot.getBoundingClientRect();
+    hand.style.transform = `translate(${r.left + r.width/2 - 24}px, ${r.top + r.height/2 - 24}px)`;
+  }
+  
+  if(userVal === G.o.ans) {
+    // ¡Acierto!
+    ok();
+    fx("fo");
+    for(let i = 0; i < numDigits; i++) {
+      const el = $(`#slot-${i}`);
+      if(el) el.classList.add("right");
+    }
+    G.n++;
+    say(pick(["¡Genial! 🌟", "¡Perfecto, crack de las mates! 💙", "¡Bien hecho! Poppy sonríe 🎀", "¡Eso es! ⚡"]));
+    
+    if(G.n >= 5) {
+      G.to = setTimeout(() => endRound(true), 1100);
+    } else {
+      G.to = setTimeout(() => {
+        if(hand) hand.style.transform = "";
+        nextQuestion();
+      }, 1200);
+    }
+  } else {
+    // Fallo
+    bad();
+    fx("fb");
+    for(let i = 0; i < numDigits; i++) {
+      const el = $(`#slot-${i}`);
+      if(el) el.classList.add("wrong");
+    }
+    
+    // Pistas pedagógicas
+    let hint = "¡Casi! Inténtalo otra vez 💪";
+    if(numDigits > 1 && G.digits[0] !== (G.o.ans % 10)) {
+      hint = "Mira primero las unidades 👀";
+    } else if(G.o.t === "+" && G.o.a % 10 + G.o.b % 10 >= 10) {
+      hint = "¡Recuerda sumar la llevada arriba! 💡";
+    }
+    say(hint);
+    
+    G.e++;
+    setTimeout(() => {
+      for(let i = 0; i < numDigits; i++) {
+        const el = $(`#slot-${i}`);
+        if(el) el.classList.remove("wrong");
+      }
+      G.digits = Array(numDigits).fill("");
+      G.curSlot = 0;
+      updateSlotsVisual();
+      if(hand) hand.style.transform = "";
+      G.lock = 0;
+    }, 1100);
+  }
+}
+
+// Soporte para teclado físico (Chromebook / PC / Teclados Bluetooth)
+window.addEventListener("keydown", e => {
+  if(scr !== "game" || !G || G.lock) return;
+  if(e.key >= "0" && e.key <= "9") {
+    pressDigit(parseInt(e.key, 10));
+  } else if(e.key === "Backspace" || e.key === "Delete") {
+    pressDel();
+  } else if(e.key === "Enter") {
+    submitCheck();
+  }
+});
+
+/* Fin de Ronda y Celebración */
+function endRound(win) {
+  stop();
+  const ageKey = G.ageKey;
+  const sub = G.sub;
+  
+  if(win) {
+    const stars = Math.max(1, 5 - G.e);
+    if(!PM.cur.prog[ageKey]) PM.cur.prog[ageKey] = {};
+    const prev = PM.cur.prog[ageKey][sub] || { stars: 0 };
+    const coins = stars > prev.stars ? (stars - prev.stars) * 20 : 10;
+    PM.cur.coins += coins;
+    
+    if(stars > prev.stars) PM.cur.prog[ageKey][sub] = { stars };
+    PM.save();
+    coinsUI();
+    
+    if(stars === 5) return celebrate(ageKey, sub);
+    
+    go("end", `<div class="card" style="padding:24px 16px">
+      <div style="font-size:3.5rem">🏆</div>
+      <h1 class="tt" style="color:var(--yl);margin:6px 0">¡Nivel Completado!</h1>
+      <div style="font-size:2.2rem;margin:10px 0">${"⭐".repeat(stars)}</div>
+      <div class="pill" style="display:inline-flex;margin:10px auto"><i class="cn">$</i>+${coins} Monedas</div>
+      <p style="color:#bad4f5">¡Gran trabajo resolviendo las operaciones dígito a dígito!</p>
+      <div style="margin-top:20px">
+        <button class="btn gr" onclick="levelMap('${ageKey}')">Continuar</button>
+      </div>
+    </div>`);
+  } else {
+    go("end", `<div class="card">
+      <div style="font-size:3.5rem">💡</div>
+      <h1 class="tt">¡Casi lo logras!</h1>
+      <p>Sigue practicando, ¡cada vez lo harás más rápido!</p>
+      <button class="btn gr" onclick="play('${ageKey}', ${sub})">🔄 Reintentar</button>
+      <button class="btn" onclick="levelMap('${ageKey}')">Niveles</button>
+    </div>`);
+  }
+}
+
+function celebrate(ageKey, sub) {
+  const overlay = $("#modal-overlay");
+  const content = $("#modal-content");
+  content.innerHTML = `<h1 class="tt" style="color:var(--yl)">🎉 ¡ENHORABUENA ${PM.cur.name.toUpperCase()}! 🎉</h1>
+  <p style="font-size:1.3rem">¡Has conseguido 5 Estrellas!</p>
+  <div style="font-size:2.8rem;margin:16px 0">⭐⭐⭐⭐⭐</div>
+  <p style="color:#bfe0ff">¡Eres un auténtico Maestro de la Fábrica de Mates!</p>
+  <button class="btn gr" onclick="$('#modal-overlay').classList.remove('s'); levelMap('${ageKey}')">¡GENIAL!</button>`;
+  
+  // Confetti local
+  for(let i = 0; i < 40; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "%";
+    c.style.background = pick(["#19a7ff","#ff3fa4","#ffd23f","#2dff7a","#b34bff"]);
+    c.style.animationDelay = Math.random() * 2 + "s";
+    content.appendChild(c);
+  }
+  
+  overlay.classList.add("s");
+  fanfare();
+}
+
+/* ==========================================================================
+   8. PERFILES Y GESTIÓN DE AVATARES LOCALES
+   ========================================================================== */
+function loginView() {
+  stop();
+  go("login", `<h2 class="tt">¿Quién va a jugar?</h2>
+  <div class="stt">Perfiles guardados en tu dispositivo</div>
+  <div class="prof-grid">
+    ${P.map(p => `<div class="prof-card" onclick="selectProfile('${p.id}')">
+      ${getAvatarSVG(p.avatar)}
+      <b>${p.name}</b>
+      <div class="age-tag">${p.age || '7-8'} años</div>
+      <div class="del" onclick="event.stopPropagation();if(confirm('¿Borrar a ${p.name}?')) PM.del('${p.id}')">Borrar</div>
+    </div>`).join("")}
+    <div class="prof-card add" onclick="createProfileView()">
+      <div style="font-size:3rem;line-height:1">+</div>
+      <b>Nuevo Jugador</b>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:14px">
+    ${P.length ? '<button class="btn" onclick="title()">VOLVER</button>' : ''}
+  </div>`);
+}
+
+function selectProfile(id) {
+  A = id;
+  PM.save();
+  ok();
+  title();
+}
+
+function createProfileView() {
+  window.tempAvatar = "hug";
+  window.tempAge = "7-8";
+  
+  const avList = Object.keys(AVATARS).map(k => {
+    return `<div class="av-card ${k === 'hug' ? 'on' : ''}" data-av="${k}" onclick="setSelAvatar(this, '${k}')">
+      ${getAvatarSVG(k)}
+      <span>${AVATARS[k].name}</span>
+    </div>`;
+  }).join("");
+  
+  go("create", `<h2 class="tt">Nuevo Jugador</h2>
+  <div class="card" style="text-align:left">
+    <div class="form-group">
+      <label>Escribe tu nombre:</label>
+      <input type="text" id="pname" placeholder="Tu nombre..." maxlength="12" autofocus>
+    </div>
+    
+    <div class="form-group">
+      <label>Elige tu personaje favorito (100% Offline):</label>
+      <div class="avatar-grid">${avList}</div>
+    </div>
+    
+    <div class="form-group">
+      <label>Elige tu edad:</label>
+      <div class="age-bar" style="justify-content:flex-start">
+        ${Object.keys(AGE_GROUPS).map(k => `
+          <button type="button" class="age-btn ${k==='7-8'?'on':''}" onclick="setSelAge(this, '${k}')">
+            ${AGE_GROUPS[k].tag} (${AGE_GROUPS[k].name})
+          </button>
+        `).join("")}
+      </div>
+    </div>
+    
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn gr" onclick="confirmCreate()">¡LISTO PARA JUGAR!</button>
+      ${P.length ? '<button class="btn" onclick="loginView()">VOLVER</button>' : ''}
+    </div>
+  </div>`);
+}
+
+function setSelAvatar(el, avId) {
+  document.querySelectorAll(".av-card").forEach(c => c.classList.remove("on"));
+  el.classList.add("on");
+  window.tempAvatar = avId;
+  clickSound();
+}
+
+function setSelAge(el, ageKey) {
+  document.querySelectorAll(".age-btn").forEach(c => c.classList.remove("on"));
+  el.classList.add("on");
+  window.tempAge = ageKey;
+  clickSound();
+}
+
+function confirmCreate() {
+  const name = $("#pname").value.trim();
+  if(!name) return say("¡Escribe tu nombre primero!");
+  PM.create(name, window.tempAvatar || "hug", window.tempAge || "7-8");
+  ok();
+  title();
+}
+
+/* ==========================================================================
+   9. TIENDA DE JUGUETES Y PERSONALIZACIÓN
+   ========================================================================== */
+const ITEMS = [
+  { id: "h_blue", n: "Mano Azul GrabPack", c: 0, k: "h", col: "#19a7ff" },
+  { id: "h_gold", n: "Mano Dorada", c: 50, k: "h", col: "#ffd23f" },
+  { id: "h_neon", n: "Guante Neón", c: 60, k: "h", col: "#2dff7a" },
+  { id: "h_pink", n: "Mano Kissy Rosa", c: 50, k: "h", col: "#ff3fa4" },
+  { id: "h_purp", n: "Mano CatNap Morada", c: 75, k: "h", col: "#b34bff" }
+];
+
+function shop() {
+  stop();
+  if(!PM.cur) return loginView();
+  if(!PM.cur.own) PM.cur.own = ["h_blue"];
+  
+  go("shop", `<h2 class="tt">Tienda Playtime Co.</h2>
+  <div class="stt">Usa tus Monedas Playtime para personalizar tu GrabPack</div>
+  
+  <div class="card">
+    <h3 style="color:var(--yl);margin:0 0 10px 0">Manos del GrabPack</h3>
+    <div class="shop-grid">
+      ${ITEMS.map(it => {
+        const isOwned = PM.cur.own.includes(it.id);
+        const isEquipped = PM.cur.hand === it.col;
+        return `<div class="shop-card">
+          <div style="height:60px">${HAND_SVG(it.col)}</div>
+          <b>${it.n}</b>
+          <button class="shop-buy-btn ${isOwned ? 'ow' : ''}" onclick="buyItem('${it.id}')">
+            ${isEquipped ? '✔ Equipado' : (isOwned ? 'Poner' : `<i class="cn">$</i>${it.c}`)}
+          </button>
+        </div>`;
+      }).join("")}
+    </div>
+    <div style="margin-top:16px">
+      <button class="btn" onclick="title()">VOLVER</button>
+    </div>
+  </div>`);
+}
+
+function buyItem(id) {
+  const item = ITEMS.find(x => x.id === id);
+  if(!item) return;
+  if(!PM.cur.own.includes(id)) {
+    if(PM.cur.coins < item.c) return say("¡Te faltan monedas! Resuelve más operaciones 💪");
+    PM.cur.coins -= item.c;
+    PM.cur.own.push(id);
+    ok();
+    say("¡Accesorio desbloqueado! 🎉");
+  } else {
+    clickSound();
+  }
+  PM.cur.hand = item.col;
+  PM.save();
+  coinsUI();
+  $("#hand").innerHTML = HAND_SVG(PM.cur.hand);
+  shop();
+}
+
+function back() {
+  stop();
+  if(scr === "game" || scr === "end") levelMap(PM.cur ? PM.cur.age : "7-8");
+  else title();
+}
+
+// Service Worker Offline
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+
+load();
 </script>
+</body>
+</html>
